@@ -1,0 +1,2 @@
+rootProject.name = "WLobby App"
+include ':app'
