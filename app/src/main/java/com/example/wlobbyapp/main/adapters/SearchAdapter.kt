@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wlobbyapp.R
-import com.example.wlobbyapp.data.search.searchMovieModel.SearchModel
+import com.example.wlobbyapp.data.search.multiSearch.MultiSearchModel
 import com.example.wlobbyapp.databinding.ItemMovieBinding
 
-class SearchMovieAdapter(private val searchResult: SearchModel) : RecyclerView.Adapter<SearchMovieAdapter.ViewHolder>() {
+class SearchAdapter(private val searchResult: MultiSearchModel) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     inner class ViewHolder(itemMovieView: ItemMovieBinding) : RecyclerView.ViewHolder(itemMovieView.root) {
         var eventBinding: ItemMovieBinding = itemMovieView
     }
