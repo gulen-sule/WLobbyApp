@@ -41,7 +41,7 @@ class SearchResultsFragment : Fragment() {
 
         LobbyApp.getInstance().progressValue.observe(requireActivity(), {//observer kullanımı
         })
-
+//kullanıcı tokenları shared preferences ile tutulacak 27 mb hafizasi var
         retrofit = ApiClient.getInstance()?.getClient()
         binding.searchRecylerView.visibility = View.INVISIBLE
         binding.searchButton.setOnClickListener {
