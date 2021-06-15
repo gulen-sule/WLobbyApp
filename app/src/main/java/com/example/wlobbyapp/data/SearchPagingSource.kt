@@ -35,6 +35,7 @@ class SearchPagingSource(
             nextpageNum=response.page?.plus(1)
         else
             nextpageNum=null
+
         Log.d("testNumberTAG", nextPageNumber.toString())
         Log.d("testNumberTAG(2)", response.page.toString())
 

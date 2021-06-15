@@ -5,14 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import androidx.paging.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import androidx.recyclerview.widget.DiffUtil
 import com.example.wlobbyapp.LobbyApp
 import com.example.wlobbyapp.R
@@ -22,7 +22,6 @@ import com.example.wlobbyapp.data.search.multiSearch.MultiSearchModel
 import com.example.wlobbyapp.data.search.multiSearch.Results
 import com.example.wlobbyapp.data.service.ApiService
 import com.example.wlobbyapp.databinding.SearchResultsFragmentBinding
-import com.example.wlobbyapp.main.adapters.ExampleLoadStateAdapter
 import com.example.wlobbyapp.main.adapters.SearchAdapter
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
@@ -31,7 +30,6 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.max
 
 class SearchResultsFragment : Fragment() {
 
@@ -121,6 +119,8 @@ class SearchResultsFragment : Fragment() {
         })
 
     }
+
+
 
     object UserComparator : DiffUtil.ItemCallback<Results>() {
         override fun areItemsTheSame(oldItem: Results, newItem: Results): Boolean {

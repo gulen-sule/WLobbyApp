@@ -31,9 +31,9 @@ class SearchAdapter(diffCallback: DiffUtil.ItemCallback<Results>, val loaded: (R
 
         if (movies != null) {
             if (movies.media_type.toString().compareTo("people") == 0)
-                Picasso.get().load(personPhotoPoster.replace("{id}", movies?.poster_path.toString())).into(holder.eventBinding.imageMovie)
+                Picasso.get().load(personPhotoPoster.replace("{id}", movies.poster_path.toString())).into(holder.eventBinding.imageMovie)
             else
-                Picasso.get().load(moviePhotoPoster.replace("{id}", movies?.poster_path.toString())).into(holder.eventBinding.imageMovie)
+                Picasso.get().load(moviePhotoPoster.replace("{id}", movies.poster_path.toString())).into(holder.eventBinding.imageMovie)
         }
 
         //objectin const valuelarina direk erisim var bu sekilde o url'in id kismini replace ederek resimleri
