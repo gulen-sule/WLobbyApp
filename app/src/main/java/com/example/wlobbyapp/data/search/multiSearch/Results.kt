@@ -1,6 +1,7 @@
 package com.example.wlobbyapp.data.search.multiSearch
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class Results(
@@ -20,4 +21,4 @@ data class Results(
     @SerializedName("video") val video: Boolean? = null,
     @SerializedName("vote_average") val vote_average: Double? = null,
     @SerializedName("vote_count") val vote_count: Int? = null
-)
+) :Serializable

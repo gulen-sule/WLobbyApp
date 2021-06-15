@@ -11,7 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="257dp">
+        android:layout_height="257dp"
+        android:id="@+id/itemLayout">
 
         <TextView
             android:id="@+id/movieTitle"
@@ -20,6 +21,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
             android:text="@{movieData.title}"
+            android:hint="Title"
             app:layout_constraintStart_toEndOf="@+id/imageMovie"
             app:layout_constraintTop_toTopOf="@+id/imageMovie" />
 
@@ -39,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:hint="MediaType"
             android:text="@{movieData.media_type}"
             app:layout_constraintStart_toStartOf="@+id/movieTitle"
             app:layout_constraintTop_toBottomOf="@+id/movieTitle" />

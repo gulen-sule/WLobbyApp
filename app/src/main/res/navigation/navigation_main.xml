@@ -10,5 +10,21 @@
         android:name="com.example.wlobbyapp.main.fragments.SearchResultsFragment"
         android:label="SearchResultsFragment"
         tools:layout="@layout/search_results_fragment"
-        />
+        >
+        <action
+            android:id="@+id/action_searchResultsFragment_to_chooseDateFragment"
+            app:destination="@id/chooseDateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseDateFragment"
+        android:name="com.example.wlobbyapp.main.fragments.ChooseDateFragment"
+        android:label="ChooseDateFragment"
+        tools:layout="@layout/choose_date_fragment">
+        <action
+            android:id="@+id/action_chooseDateFragment_to_searchResultsFragment"
+            app:destination="@id/searchResultsFragment" />
+        <argument
+            android:name="movieInfo"
+            app:argType="com.example.wlobbyapp.data.search.multiSearch.Results" />
+    </fragment>
 </navigation>
