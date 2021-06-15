@@ -29,16 +29,19 @@ class SearchPagingSource(
         /*val temp = ArrayList<Results>()
         temp.add(Results(title = "deneme"))
         val tempData = temp.toList()*/
+        var nextpageNum:Int?=response.page?.plus(1)
 
-        //if(response.total_pages >=)
-
+        if(nextpageNum!=null&& response.total_pages!! >=nextpageNum)
+            nextpageNum=response.page?.plus(1)
+        else
+            nextpageNum=null
         Log.d("testNumberTAG", nextPageNumber.toString())
         Log.d("testNumberTAG(2)", response.page.toString())
 
         return LoadResult.Page(
             data = resultData,
             prevKey = null,
-            nextKey = response.page?.plus(1)
+            nextKey =nextpageNum
         )
     }
 

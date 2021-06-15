@@ -31,6 +31,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.max
 
 class SearchResultsFragment : Fragment() {
 
@@ -112,7 +113,6 @@ class SearchResultsFragment : Fragment() {
                     searchResultData = response.body()!!
                     completed(searchResultData)
                 }
-
             }
 
             override fun onFailure(call: Call<MultiSearchModel>, t: Throwable) {
