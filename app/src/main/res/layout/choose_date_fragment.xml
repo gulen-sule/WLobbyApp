@@ -5,7 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="6dp">
 
         <ImageView
@@ -13,7 +13,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +23,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
             app:layout_constraintStart_toEndOf="@+id/posterDate"
@@ -34,13 +32,13 @@
                 android:id="@+id/TitleDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                />
 
             <TextView
                 android:id="@+id/mediaTypeDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                 />
         </LinearLayout>
 
         <CalendarView
@@ -56,9 +54,9 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
-            android:text="Button"
+            android:text="SET"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/calendarView"
             app:layout_constraintTop_toBottomOf="@+id/calendarView" />

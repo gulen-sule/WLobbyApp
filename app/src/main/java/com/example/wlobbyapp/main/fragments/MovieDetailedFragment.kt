@@ -1,6 +1,5 @@
 package com.example.wlobbyapp.main.fragments
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.data.search.multiSearch.Results
 import com.example.wlobbyapp.databinding.MovieDetailedFragmentBinding
@@ -19,8 +18,9 @@ import com.squareup.picasso.Picasso
 class MovieDetailedFragment : Fragment() {
     private lateinit var binding: MovieDetailedFragmentBinding
     private var itemData: Results? = null
-    private val sharedPref:SharedPreferences=activity?.getPreferences(Context.MODE_PRIVATE)!!
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private lateinit var sharedPref: SharedPreferences
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.movie_detailed_fragment, container, false)
         return binding.root
     }
@@ -69,10 +69,10 @@ class MovieDetailedFragment : Fragment() {
                 }
             }
         }
+        sharedPref=PreferenceManager.getDefaultSharedPreferences(context)
+        if(sharedPref.contains(itemData?.title.toString()))
+           // sharedPref.edit().clear().apply()
+           binding.watchedDate.text=sharedPref.getString(itemData?.title.toString(),"date")
     }
 
-    private fun isWatched() {
-        
-
-    }
 }

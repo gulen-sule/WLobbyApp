@@ -1,31 +1,26 @@
 package com.example.wlobbyapp.main.fragments
 
-import android.content.Context
-import android.icu.util.TimeZone
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.CalendarView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.ui.navigateUp
+import androidx.preference.PreferenceManager
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.data.search.multiSearch.Results
 import com.example.wlobbyapp.databinding.ChooseDateFragmentBinding
 import com.example.wlobbyapp.main.adapters.SearchAdapter
 import com.squareup.picasso.Picasso
-import okhttp3.internal.wait
 
 class ChooseDateFragment : Fragment() {
     private lateinit var binding: ChooseDateFragmentBinding
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.choose_date_fragment, container, false)
         return binding.root
     }
@@ -38,22 +33,22 @@ class ChooseDateFragment : Fragment() {
 
         val animationCome = AnimationUtils.loadAnimation(requireContext(), R.anim.slidein_bottom)
         val animationGo = AnimationUtils.loadAnimation(requireContext(), R.anim.slideout_top)
-        val dateToday: Long = binding.calendarView.date
-        var dateGet: Long = 0L
+        var dateDay = "1"
+        var dateMonth = "1"
+        var dateYear = "1"
 
-        binding.calendarView.setOnDateChangeListener(
-            CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
-                if (binding.calendarView.date > dateToday)
-                    dateGet = binding.calendarView.date
-                binding.calendarView.isSelected = true
-            }
-
-        )
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            dateDay = dayOfMonth.toString()
+            dateMonth = month.toString()
+            dateYear = year.toString()
+            binding.calendarView.isSelected = true
+        }
         binding.button.setOnClickListener {
             if (binding.calendarView.isSelected) {
-                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
                 with(sharedPref?.edit()) {
-                    this?.putLong(itemData.title.toString(), dateGet)
+                    //Log.d("dataGet ?", dateGet.toString())
+                    this?.putString(itemData.title.toString(), dateDay + "/" + dateMonth + "/" + dateYear)
                     this?.apply()
                 }
                 Navigation.findNavController(view).navigateUp()
