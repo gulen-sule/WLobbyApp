@@ -34,7 +34,7 @@ import retrofit2.Response
 class SearchResultsFragment : Fragment() {
 
     private lateinit var binding: SearchResultsFragmentBinding
-    private var retrofit: ApiService? = null
+    private var apiService: ApiService? = null
     private lateinit var searchResultData: MultiSearchModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,82 +45,58 @@ class SearchResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        LobbyApp.getInstance().progressValue.observe(requireActivity(), {
-            //observer kullanımı
-        })
+//        LobbyApp.getInstance().progressValue.observe(requireActivity(), {
+//            //observer kullanımı
+//        }) ihtiyacım olursa diye ogren
+//          kullanıcı tokenları shared preferences ile tutulacak 27 mb hafizasi var
 
-        val adapter = SearchAdapter(UserComparator, loaded = {
-            val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToChooseDateFragment(it!!)
-            Navigation.findNavController(view).navigate(action)
+
+        val adapter = SearchAdapter(UserComparator, onClick = {
+            it?.let {
+                val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToMovieDetailedFragment(it)
+                Navigation.findNavController(requireView()).navigate(action)
+            }
         })
 
         binding.searchRecylerView.adapter = adapter
-
-        //kullanıcı tokenları shared preferences ile tutulacak 27 mb hafizasi var
-        retrofit = ApiClient.getInstance()?.getClient()
-
-        //binding.searchRecylerView.visibility = View.INVISIBLE
+        apiService = ApiClient.getInstance()?.getClient()
 
         binding.searchButton.setOnClickListener {
-
             lifecycleScope.launch {
                 getPaging().collectLatest { pagingData ->
                     adapter.submitData(pagingData)
                 }
             }
-
-            /* getMovies(key, completed = {
-                 binding.searchRecylerView.visibility = View.VISIBLE
-
-                 adapter.withLoadStateHeaderAndFooter(
-                     header = ExampleLoadStateAdapter(adapter::retry),
-                     footer = ExampleLoadStateAdapter(adapter::retry)
-                 )
-
-                 lifecycleScope.launch {
-                     adapter.loadStateFlow.collectLatest {
-                         binding.progressBar.isVisible = it.refresh is LoadState.Loading
-                     }
-                 }
-
-                 adapter.notifyDataSetChanged()
-             })*/
         }
-
-        /* */
-
     }
 
     private fun getPaging(): Flow<PagingData<Results>> {
         return Pager(
             PagingConfig(pageSize = 20)
         ) {
-            SearchPagingSource(binding.editTextTextPersonName.text.toString(), retrofit!!)
+            SearchPagingSource(binding.editTextTextPersonName.text.toString(), apiService!!)
         }.flow
             .cachedIn(requireActivity().lifecycleScope)
-
     }
 
-    private fun getMovies(key: String, completed: (MultiSearchModel) -> Unit) {
-        val response = retrofit?.multiSearch(query = key)
-
-        response?.enqueue(object : Callback<MultiSearchModel> {
-            override fun onResponse(call: Call<MultiSearchModel>, response: Response<MultiSearchModel>) {
-                Log.d("dataJSON ", Gson().toJson(response.body()))
-                response.body()?.let {
-                    searchResultData = response.body()!!
-                    completed(searchResultData)
-                }
-            }
-
-            override fun onFailure(call: Call<MultiSearchModel>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-
-    }
-
-
+//    private fun getMovies(key: String, completed: (MultiSearchModel) -> Unit) {
+//        val response = apiService?.multiSearch(query = key)
+//
+//        response?.enqueue(object : Callback<MultiSearchModel> {
+//            override fun onResponse(call: Call<MultiSearchModel>, response: Response<MultiSearchModel>) {
+//                Log.d("dataJSON ", Gson().toJson(response.body()))
+//                response.body()?.let {
+//                    searchResultData = response.body()!!
+//                    completed(searchResultData)
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<MultiSearchModel>, t: Throwable) {
+//                t.printStackTrace()
+//            }
+//        })
+//
+//    }
 
     object UserComparator : DiffUtil.ItemCallback<Results>() {
         override fun areItemsTheSame(oldItem: Results, newItem: Results): Boolean {

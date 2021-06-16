@@ -1,9 +1,7 @@
 package com.example.wlobbyapp.main.adapters
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.widget.DrawableUtils
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -13,17 +11,14 @@ import com.example.wlobbyapp.Const.personPhotoPoster
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.data.search.multiSearch.Results
 import com.example.wlobbyapp.databinding.ItemMovieBinding
-import com.example.wlobbyapp.databinding.ItemMovieBindingImpl
 import com.example.wlobbyapp.databinding.ItemPersonBinding
 import com.example.wlobbyapp.databinding.ItemTvBinding
 import com.example.wlobbyapp.main.adapters.SearchAdapter.MediaType.*
 import com.squareup.picasso.Picasso
-import java.util.*
 
-class SearchAdapter(diffCallback: DiffUtil.ItemCallback<Results>, val loaded: (Results?) -> Unit) :
+class SearchAdapter(diffCallback: DiffUtil.ItemCallback<Results>, val onClick: (Results?) -> Unit) :
     PagingDataAdapter<Results, SearchAdapter.ViewHolder>(diffCallback) {
     private var layoutType: Int = 0
-
 
     inner class ViewHolder : RecyclerView.ViewHolder {
         lateinit var itemMovieBinding: ItemMovieBinding
@@ -65,7 +60,7 @@ class SearchAdapter(diffCallback: DiffUtil.ItemCallback<Results>, val loaded: (R
                 //objectin const valuelarina direk erisim var bu sekilde o url'in id kismini replace ederek resimleri
                 // cekebiliyorum ayrica buyuk versiyonu icin de bir constv olusturuldu
                 holder.itemMovieBinding.itemLayout.setOnClickListener {
-                    loaded(movies)
+                    onClick(movies)
                 }
             }
             TV.value -> {
@@ -74,7 +69,7 @@ class SearchAdapter(diffCallback: DiffUtil.ItemCallback<Results>, val loaded: (R
                 Picasso.get().load(moviePhotoPoster.replace("{id}", movies.poster_path.toString())).into(holder.itemTvBinding.imageMovie)
                 holder.itemTvBinding.movieTitle.text = movies.name
                 holder.itemTvBinding.itemLayout.setOnClickListener {
-                    loaded(movies)
+                    onClick(movies)
                 }
             }
             PEOPLE.value -> {
@@ -83,7 +78,7 @@ class SearchAdapter(diffCallback: DiffUtil.ItemCallback<Results>, val loaded: (R
                 Picasso.get().load(personPhotoPoster.replace("{id}", movies.profile_path.toString())).into(holder.itemPersonBinding.imageMovie)
                 holder.itemPersonBinding.movieTitle.text = movies.name
                 holder.itemPersonBinding.itemLayout.setOnClickListener {
-                    loaded(movies)
+                    onClick(movies)
                 }
             }
         }
@@ -104,7 +99,7 @@ class SearchAdapter(diffCallback: DiffUtil.ItemCallback<Results>, val loaded: (R
         return layoutType
     }
 
-    private enum class MediaType(val value: String) {
+    enum class MediaType(val value: String) {
         TV("tv"),
         MOVIE("movie"),
         PEOPLE("person")

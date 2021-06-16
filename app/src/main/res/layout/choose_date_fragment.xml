@@ -9,7 +9,7 @@
         android:layout_marginTop="6dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/posterDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -27,17 +27,17 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView">
+            app:layout_constraintStart_toEndOf="@+id/posterDate"
+            app:layout_constraintTop_toTopOf="@+id/posterDate">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/TitleDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/mediaTypeDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
@@ -50,7 +50,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/posterDate" />
 
         <Button
             android:id="@+id/button"
