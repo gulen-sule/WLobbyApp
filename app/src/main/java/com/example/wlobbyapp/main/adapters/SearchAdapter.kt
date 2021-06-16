@@ -1,7 +1,9 @@
 package com.example.wlobbyapp.main.adapters
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.DrawableUtils
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -11,36 +13,102 @@ import com.example.wlobbyapp.Const.personPhotoPoster
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.data.search.multiSearch.Results
 import com.example.wlobbyapp.databinding.ItemMovieBinding
+import com.example.wlobbyapp.databinding.ItemMovieBindingImpl
+import com.example.wlobbyapp.databinding.ItemPersonBinding
+import com.example.wlobbyapp.databinding.ItemTvBinding
+import com.example.wlobbyapp.main.adapters.SearchAdapter.MediaType.*
 import com.squareup.picasso.Picasso
+import java.util.*
 
 class SearchAdapter(diffCallback: DiffUtil.ItemCallback<Results>, val loaded: (Results?) -> Unit) :
     PagingDataAdapter<Results, SearchAdapter.ViewHolder>(diffCallback) {
+    private var layoutType: Int = 0
 
-    inner class ViewHolder(itemMovieView: ItemMovieBinding) : RecyclerView.ViewHolder(itemMovieView.root) {
-        var eventBinding: ItemMovieBinding = itemMovieView
+
+    inner class ViewHolder : RecyclerView.ViewHolder {
+        lateinit var itemMovieBinding: ItemMovieBinding
+        lateinit var itemTvBinding: ItemTvBinding
+        lateinit var itemPersonBinding: ItemPersonBinding
+
+        constructor(itemPersonBinding: ItemPersonBinding) : super(itemPersonBinding.root) {
+            this.itemPersonBinding = itemPersonBinding
+
+        }
+
+        constructor(itemTvBinding: ItemTvBinding) : super(itemTvBinding.root) {
+            this.itemTvBinding = itemTvBinding
+        }
+
+        constructor(itemMovieBinding: ItemMovieBinding) : super(itemMovieBinding.root) {
+            this.itemMovieBinding = itemMovieBinding
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val movieItemBinding: ItemMovieBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_movie, parent, false)
-        return ViewHolder(movieItemBinding)
+
+        return when (layoutType) {
+            0 -> ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_tv, parent, false) as ItemTvBinding)
+            1 -> ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_movie, parent, false) as ItemMovieBinding)
+            else -> ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_person, parent, false) as ItemPersonBinding)
+        }
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movies = this.getItem(position)
-        holder.eventBinding.movieData = movies
 
-        if (movies != null) {
-            if (movies.media_type.toString().compareTo("people") == 0)
-                Picasso.get().load(personPhotoPoster.replace("{id}", movies.poster_path.toString())).into(holder.eventBinding.imageMovie)
-            else
-                Picasso.get().load(moviePhotoPoster.replace("{id}", movies.poster_path.toString())).into(holder.eventBinding.imageMovie)
-        }
-
-        //objectin const valuelarina direk erisim var bu sekilde o url'in id kismini replace ederek resimleri
-        // cekebiliyorum ayrica buyuk versiyonu icin de bir constv olusturuldu
-
-        holder.eventBinding.itemLayout.setOnClickListener {
-            loaded(movies)
+        when (movies?.media_type) {
+            MOVIE.value -> {
+                holder.itemMovieBinding.movieData = movies
+                if(movies.poster_path!=null)
+                Picasso.get().load(moviePhotoPoster.replace("{id}", movies.poster_path.toString())).into(holder.itemMovieBinding.imageMovie)
+                //objectin const valuelarina direk erisim var bu sekilde o url'in id kismini replace ederek resimleri
+                // cekebiliyorum ayrica buyuk versiyonu icin de bir constv olusturuldu
+                holder.itemMovieBinding.itemLayout.setOnClickListener {
+                    loaded(movies)
+                }
+            }
+            TV.value -> {
+                holder.itemTvBinding.movieData = movies
+                if(movies.poster_path!=null)
+                Picasso.get().load(moviePhotoPoster.replace("{id}", movies.poster_path.toString())).into(holder.itemTvBinding.imageMovie)
+                holder.itemTvBinding.movieTitle.text = movies.name
+                holder.itemTvBinding.itemLayout.setOnClickListener {
+                    loaded(movies)
+                }
+            }
+            PEOPLE.value -> {
+                holder.itemPersonBinding.movieData = movies
+                if(movies.profile_path!=null)
+                Picasso.get().load(personPhotoPoster.replace("{id}", movies.profile_path.toString())).into(holder.itemPersonBinding.imageMovie)
+                holder.itemPersonBinding.movieTitle.text = movies.name
+                holder.itemPersonBinding.itemLayout.setOnClickListener {
+                    loaded(movies)
+                }
+            }
         }
     }
+
+    override fun getItemViewType(position: Int): Int {
+        when (getItem(position)?.media_type.toString()) {
+            TV.value -> {
+                layoutType = 0
+            }
+            MOVIE.value -> {
+                layoutType = 1
+            }
+            PEOPLE.value -> {
+                layoutType = 2
+            }
+        }
+        return layoutType
+    }
+
+    private enum class MediaType(val value: String) {
+        TV("tv"),
+        MOVIE("movie"),
+        PEOPLE("person")
+    }
+
+
 }

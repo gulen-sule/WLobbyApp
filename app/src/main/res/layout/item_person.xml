@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:background="@drawable/movie_item_background">
+        android:background="@drawable/person_item_background">
 
         <TextView
             android:id="@+id/movieTitle"
@@ -24,7 +24,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
             android:hint="Title"
-            android:text="@{movieData.title}"
+            android:text="@{movieData.name}"
             app:layout_constraintStart_toEndOf="@+id/imageMovie"
             app:layout_constraintTop_toTopOf="@+id/imageMovie" />
 
@@ -35,11 +35,11 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/no_movie_image"
+            android:src="@drawable/no_person_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/no_movie_image" />
+            tools:srcCompat="@drawable/no_person_image" />
 
         <TextView
             android:id="@+id/mediaType"

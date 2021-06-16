@@ -10,3 +10,4 @@ data class MultiSearchModel(
     @SerializedName("total_pages") val total_pages: Int? = null,
     @SerializedName("total_results") val total_results: Int? = null
 ) : Serializable
+

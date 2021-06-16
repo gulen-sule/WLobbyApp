@@ -26,9 +26,6 @@ class SearchPagingSource(
         val response = service.multiSearchPaging(query = text, page = nextPageNumber)
         val resultData = response.results as ArrayList<Results>
 
-        /*val temp = ArrayList<Results>()
-        temp.add(Results(title = "deneme"))
-        val tempData = temp.toList()*/
         var nextpageNum:Int?=response.page?.plus(1)
 
         if(nextpageNum!=null&& response.total_pages!! >=nextpageNum)
