@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,11 +19,12 @@
             app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tvDetailedFragmentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/movieDetailedPoster"
+                    android:id="@+id/tvDetailedPoster"
                     android:layout_width="142dp"
                     android:layout_height="118dp"
                     android:layout_marginStart="16dp"
@@ -33,36 +34,35 @@
                     app:srcCompat="@drawable/no_movie_image" />
 
                 <TextView
-                    android:id="@+id/detailedTitle"
+                    android:id="@+id/tvDetailedTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:text="TextView"
-                    app:layout_constraintStart_toEndOf="@+id/movieDetailedPoster"
-                    app:layout_constraintTop_toTopOf="@+id/movieDetailedPoster" />
+                    app:layout_constraintStart_toEndOf="@+id/tvDetailedPoster"
+                    app:layout_constraintTop_toTopOf="@+id/tvDetailedPoster" />
 
                 <TextView
-                    android:id="@+id/movieDetailedMediaType"
+                    android:id="@+id/tvDetailedMediaType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="@+id/detailedTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/detailedTitle" />
+                    app:layout_constraintEnd_toEndOf="@+id/tvDetailedTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDetailedTitle" />
 
                 <TextView
-                    android:id="@+id/moviedetailedOverview"
+                    android:id="@+id/tvDetailedOverview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:text="TextView"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.442"
                     app:layout_constraintStart_toStartOf="@+id/addToListFloatingButton"
                     app:layout_constraintTop_toBottomOf="@+id/addToListFloatingButton" />
 
@@ -73,10 +73,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_calendar_multiselect"
-                    app:layout_constraintStart_toStartOf="@+id/movieDetailedPoster"
-                    app:layout_constraintTop_toBottomOf="@+id/movieDetailedPoster" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintStart_toStartOf="@+id/tvDetailedPoster"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDetailedPoster" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

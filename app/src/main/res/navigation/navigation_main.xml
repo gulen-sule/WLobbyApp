@@ -4,40 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
     app:startDestination="@id/searchResultsFragment">
-
-
     <fragment
         android:id="@+id/searchResultsFragment"
-        android:name="com.example.wlobbyapp.main.fragments.SearchResultsFragment"
+        android:name="com.example.wlobbyapp.view.fragments.SearchResultsFragment"
         android:label="SearchResultsFragment" >
         <action
             android:id="@+id/action_searchResultsFragment_to_movieDetailedFragment"
             app:destination="@id/movieDetailedFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/movieDetailedFragment"
-        android:name="com.example.wlobbyapp.main.fragments.MovieDetailedFragment"
-        android:label="MovieDetailedFragment" >
-        <argument
-            android:name="resultData"
-            app:argType="com.example.wlobbyapp.data.search.multiSearch.Results"
-            app:nullable="true" />
         <action
-            android:id="@+id/action_movieDetailedFragment_to_chooseDateFragment"
+            android:id="@+id/action_searchResultsFragment_to_tvDetailedFragment"
+            app:destination="@id/tvDetailedFragment" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_chooseDateFragment"
             app:destination="@id/chooseDateFragment" />
     </fragment>
     <fragment
+        android:id="@+id/movieDetailedFragment"
+        android:name="com.example.wlobbyapp.view.fragments.detailedFragments.MovieDetailedFragment"
+        android:label="MovieDetailedFragment" >
+        <argument
+            android:name="movie_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvDetailedFragment"
+        android:name="com.example.wlobbyapp.view.fragments.detailedFragments.TvDetailedFragment"
+        android:label="TvDetailedFragment" >
+        <argument
+            android:name="tv_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
         android:id="@+id/chooseDateFragment"
-        android:name="com.example.wlobbyapp.main.fragments.ChooseDateFragment"
+        android:name="com.example.wlobbyapp.view.fragments.ChooseDateFragment"
         android:label="ChooseDateFragment" >
         <argument
-            android:name="movieData"
-            app:argType="com.example.wlobbyapp.data.search.multiSearch.Results"
-            app:nullable="true" />
-        <action
-            android:id="@+id/action_chooseDateFragment_to_movieDetailedFragment"
-            app:destination="@id/movieDetailedFragment" />
+            android:name="resultData"
+            app:argType="com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult" />
     </fragment>
-
-
 </navigation>

@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="movieData"
-            type="com.example.wlobbyapp.data.search.multiSearch.Results" />
+            type="com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,6 +39,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/no_movie_image" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/insertAd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_calendar_plus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mediaType" />
 
         <TextView
             android:id="@+id/mediaType"
