@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.view.fragments
+package com.example.wlobbyapp.ui.fragments
 
 import android.os.Bundle
 import android.os.Handler
@@ -13,15 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
 import com.example.wlobbyapp.R
+import com.example.wlobbyapp.databinding.FragmentChooseDateBinding
 import com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult
-import com.example.wlobbyapp.databinding.ChooseDateFragmentBinding
-import com.example.wlobbyapp.view.adapters.SearchAdapter
+import com.example.wlobbyapp.ui.adapters.SearchAdapter
 import com.squareup.picasso.Picasso
 
 class ChooseDateFragment : Fragment() {
-    private lateinit var binding: ChooseDateFragmentBinding
+    private lateinit var binding: FragmentChooseDateBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.choose_date_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_choose_date, container, false)
         return binding.root
     }
 
@@ -51,7 +51,7 @@ class ChooseDateFragment : Fragment() {
                     this?.putString(itemData?.title.toString(), dateDay + "/" + dateMonth + "/" + dateYear)
                     this?.apply()
                 }
-                Navigation.findNavController(view).navigateUp()
+                Navigation.findNavController(requireView()).navigateUp()
             }
             binding.warningChooseDate.startAnimation(animationCome)
         }

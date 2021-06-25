@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.viewmodel
+package com.example.wlobbyapp.ui.tvFragment
 
 import com.example.wlobbyapp.model.ApiClient
 import com.example.wlobbyapp.model.detailedModels.tvDetailed.TvModel

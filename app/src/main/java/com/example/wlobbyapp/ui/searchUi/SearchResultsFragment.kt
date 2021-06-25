@@ -1,8 +1,6 @@
-package com.example.wlobbyapp.view.fragments
+package com.example.wlobbyapp.ui.searchUi
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Parcel
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -18,63 +15,65 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.recyclerview.widget.DiffUtil
 import com.example.wlobbyapp.R
-import com.example.wlobbyapp.databinding.SearchResultsFragmentBinding
+import com.example.wlobbyapp.databinding.FragmentSearchResultsBinding
 import com.example.wlobbyapp.model.ApiClient
 import com.example.wlobbyapp.model.SearchPagingSource
 import com.example.wlobbyapp.model.search.multiSearch.MultiSearchModel
 import com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult
 import com.example.wlobbyapp.model.service.ApiService
-import com.example.wlobbyapp.view.MainActivity
-import com.example.wlobbyapp.view.adapters.SearchAdapter
-import com.example.wlobbyapp.view.adapters.SearchAdapter.MediaType
+import com.example.wlobbyapp.ui.MainActivity
+import com.example.wlobbyapp.ui.adapters.SearchAdapter
+import com.example.wlobbyapp.ui.adapters.SearchAdapter.MediaType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class SearchResultsFragment : Fragment() {
 
-    private lateinit var binding: SearchResultsFragmentBinding
+    private lateinit var binding: FragmentSearchResultsBinding
     private var apiService: ApiService? = null
-    private var isPaged:Boolean=false
+    private var isPaged: Boolean = false
     private lateinit var searchResultData: MultiSearchModel
-    private var textToSearch: String = "a"
+    private var textToSearch: String = "aa"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
-            isPaged=savedInstanceState.getBoolean("is_started_before")
+            isPaged = savedInstanceState.getBoolean("is_started_before")
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.search_results_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_results, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle_given= activity?.intent?.extras
+        val bundle_given = this.arguments?.getBundle("key_text_bundle")
         if (bundle_given != null) {
-            textToSearch = bundle_given.getString("paging_key","a")
+            textToSearch = bundle_given.getString("paging_key", "aa")
         }
 //        LobbyApp.getInstance().progressValue.observe(requireActivity(), {
 //            //observer kullanımı
 //        }) ihtiyacım olursa diye ogren
 //          kullanıcı tokenları shared preferences ile tutulacak 27 mb hafizasi var
 
-
         val adapter = SearchAdapter(UserComparator, onClickImage = {
+            binding.progressBar.visibility=View.VISIBLE
             it?.let {
                 when (it.media_type) {
                     MediaType.MOVIE.value -> {
                         it.id?.let { movieId ->
                             val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToMovieDetailedFragment(movieId)
-                            Navigation.findNavController(requireView()).navigate(action)
+                            getMainActivity()?.navController?.navigate(action)
+                            //Navigation.findNavController(requireView()).navigate(action)
                         }
                     }
                     MediaType.TV.value -> {
                         it.id?.let { tvId ->
                             val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToTvDetailedFragment(tvId)
-                            Navigation.findNavController(requireView()).navigate(action)
+                            (requireActivity() as MainActivity).navController.navigate(action)
+
                         }
                     }
                     MediaType.COLL.value -> {
@@ -82,27 +81,33 @@ class SearchResultsFragment : Fragment() {
                 }
             }
         }, onClickButton = { itemData ->
+            binding.progressBar.visibility=View.VISIBLE
             val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToChooseDateFragment(itemData)
+            Log.d("navController content", findNavController().toString())
             findNavController().navigate(action)
+
         })
 
         binding.searchRecylerView.adapter = adapter
         apiService = ApiClient.getInstance()?.getClient()
         lifecycleScope.launch {
             getPaging().collectLatest { pagingData ->
+                binding.progressBar.visibility=View.GONE
                 adapter.submitData(pagingData)
             }
         }
         binding.searchButton.setOnClickListener {
+            binding.progressBar.visibility=View.VISIBLE
+
             bundle_given?.remove("paging_key")
             textToSearch = binding.editTextTextPersonName.text.toString()
             val bundle = Bundle()
             bundle.putString("paging_key", textToSearch)
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            intent.putExtras( bundle)
-            startActivity(intent)
+            arguments?.putBundle("key_text_bundle",bundle)
+
             lifecycleScope.launch {
                 getPaging().collectLatest { pagingData ->
+                    binding.progressBar.visibility=View.GONE
                     adapter.submitData(pagingData)
                 }
             }
@@ -149,6 +154,15 @@ class SearchResultsFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean("is_started_before",isPaged)
+        outState.putBoolean("is_started_before", isPaged)
+    }
+
+    fun getMainActivity(): MainActivity? {
+        if((requireActivity() is MainActivity))
+        {
+            return requireActivity() as MainActivity
+        }
+
+        return null
     }
 }

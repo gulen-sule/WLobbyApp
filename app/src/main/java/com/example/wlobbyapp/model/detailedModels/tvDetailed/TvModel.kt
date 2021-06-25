@@ -16,7 +16,7 @@ data class TvModel(
     @SerializedName("last_air_date") val last_air_date: String?,
     @SerializedName("last_episode_to_air") val last_episode_to_air: Last_episode_to_air?,
     @SerializedName("name") val name: String?,
-    @SerializedName("next_episode_to_air") val next_episode_to_air: String?=null,
+    @SerializedName("next_episode_to_air") val next_episode_to_air: Any?=null,
     @SerializedName("networks") val networks: Array<Networks>?,
     @SerializedName("number_of_episodes") val number_of_episodes: Int?,
     @SerializedName("number_of_seasons") val number_of_seasons: Int?,

@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.viewmodel
+package com.example.wlobbyapp.ui.movieFragment.main
 
 import androidx.lifecycle.ViewModel
 import com.example.wlobbyapp.model.ApiClient

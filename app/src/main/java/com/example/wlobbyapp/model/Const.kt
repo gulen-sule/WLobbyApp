@@ -1,4 +1,4 @@
-package com.example.wlobbyapp
+package com.example.wlobbyapp.model
 
 object Const {
 

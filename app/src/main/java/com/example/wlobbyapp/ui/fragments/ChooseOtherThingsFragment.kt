@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.view.fragments
+package com.example.wlobbyapp.ui.fragments
 
 import androidx.fragment.app.Fragment
 

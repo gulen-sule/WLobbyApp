@@ -1,6 +1,7 @@
 package com.example.wlobbyapp.model.detailedModels.MovieDetailed
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MovieModel(
     @SerializedName("status_code") val status_code: Int?,
@@ -29,4 +30,4 @@ data class MovieModel(
     @SerializedName("video") val video: Boolean?,
     @SerializedName("vote_average") val vote_average: Double?,
     @SerializedName("vote_count") val vote_count: Int?
-)
+) : Serializable

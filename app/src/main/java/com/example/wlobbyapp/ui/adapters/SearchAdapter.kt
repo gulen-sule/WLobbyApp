@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.view.adapters
+package com.example.wlobbyapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,14 +6,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wlobbyapp.Const.moviePhotoPoster
-import com.example.wlobbyapp.Const.personPhotoPoster
+import com.example.wlobbyapp.model.Const.moviePhotoPoster
+import com.example.wlobbyapp.model.Const.personPhotoPoster
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult
 import com.example.wlobbyapp.databinding.ItemMovieBinding
 import com.example.wlobbyapp.databinding.ItemPersonBinding
 import com.example.wlobbyapp.databinding.ItemTvBinding
-import com.example.wlobbyapp.view.adapters.SearchAdapter.MediaType.*
+import com.example.wlobbyapp.ui.adapters.SearchAdapter.MediaType.*
 import com.squareup.picasso.Picasso
 
 class SearchAdapter(
