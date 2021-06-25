@@ -14,8 +14,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-//    @GET("sayfa")
-//    fun getMovies(): Call<Model>
 
     @GET("3/search/keyword")
     fun searchKeyword(
@@ -55,7 +53,7 @@ interface ApiService {
     suspend fun movieDetailed(
         @Path("movie_id") movie_id: Int = 0,
         @Query("api_key") api_key: String = "f9f08b7835b905ced52616110a97a3c8",
-        @Query("language") language: String?="tr",
+        @Query("language") language: String? = "tr",
         @Query("append_to_response") append_to_response: String? = null
 
     ): Response<MovieModel>
@@ -63,7 +61,7 @@ interface ApiService {
     @GET("3/collection/{collection_id}")
     suspend fun collectionDetailed(
         @Path("collection_id") collection_id: Int = 0,
-        @Query("api_key") api_key: String ="f9f08b7835b905ced52616110a97a3c8",
+        @Query("api_key") api_key: String = "f9f08b7835b905ced52616110a97a3c8",
         @Query("language") language: String? = "tr",
         @Query("append_to_response") append_to_response: String? = null
 
@@ -73,8 +71,8 @@ interface ApiService {
     @GET("3/tv/{tv_id}")
     suspend fun tvDetailed(
         @Path("tv_id") tv_id: Int = 10,
-        @Query("api_key") api_key: String ="f9f08b7835b905ced52616110a97a3c8",
-        @Query("language") language: String?=null,
+        @Query("api_key") api_key: String = "f9f08b7835b905ced52616110a97a3c8",
+        @Query("language") language: String? = null,
         @Query("append_to_response") append_to_response: String? = null
 
     ): Response<TvModel>

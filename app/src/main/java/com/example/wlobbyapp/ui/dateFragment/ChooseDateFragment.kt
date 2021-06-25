@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.ui.fragments
+package com.example.wlobbyapp.ui.dateFragment
 
 import android.os.Bundle
 import android.os.Handler
@@ -11,15 +11,18 @@ import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.preference.PreferenceManager
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.databinding.FragmentChooseDateBinding
+import com.example.wlobbyapp.model.Room.RoomDao
+import com.example.wlobbyapp.model.Room.WatchedDatabase
 import com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult
 import com.example.wlobbyapp.ui.adapters.SearchAdapter
 import com.squareup.picasso.Picasso
 
 class ChooseDateFragment : Fragment() {
     private lateinit var binding: FragmentChooseDateBinding
+    private lateinit var itemDao: RoomDao
+    private lateinit var viewModel: ChooseDateViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_choose_date, container, false)
         return binding.root
@@ -27,6 +30,8 @@ class ChooseDateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        itemDao = WatchedDatabase.invoke(requireContext().applicationContext).RoomDao()
+        viewModel = ChooseDateViewModel(itemDao)
 
         val itemData = arguments?.getSerializable("resultData") as MultiSearchResult?
         setValuestoItems(itemData)
@@ -45,12 +50,17 @@ class ChooseDateFragment : Fragment() {
         }
         binding.button.setOnClickListener {
             if (binding.calendarView.isSelected) {
-                val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-                with(sharedPref?.edit()) {
-                    //Log.d("dataGet ?", dateGet.toString())
-                    this?.putString(itemData?.title.toString(), dateDay + "/" + dateMonth + "/" + dateYear)
-                    this?.apply()
-                }
+//                val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+//                with(sharedPref?.edit()) {
+//                    //Log.d("dataGet ?", dateGet.toString())
+//                    this?.putString(itemData?.title.toString(), dateDay + "/" + dateMonth + "/" + dateYear)
+//                    this?.apply()
+//                }
+                viewModel.insertData(
+                    date = (dateDay + "/" + dateMonth + "/" + dateYear),
+                    title = itemData?.title.toString(),
+                    poster = itemData?.poster_path.toString()
+                )
                 Navigation.findNavController(requireView()).navigateUp()
             }
             binding.warningChooseDate.startAnimation(animationCome)

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.wlobbyapp.model.Const.moviePhotoPoster
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.databinding.FragmentTvDetailedBinding
@@ -29,10 +30,10 @@ class TvDetailedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id: Int? = arguments?.getInt("tv_id")
-        Log.d("StatusCode here:",id.toString())
+        Log.d("StatusCode here:", id.toString())
         CoroutineScope(Dispatchers.Main).launch {
-                itemData = viewModel.getData(id!!)
-                setValues()
+            itemData = viewModel.getData(id!!)
+            setValues()
         }
     }
 

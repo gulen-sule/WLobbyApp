@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.wlobbyapp.model.Const.moviePhotoPoster
 import com.example.wlobbyapp.model.Const.personPhotoPoster
 import com.example.wlobbyapp.R
@@ -13,6 +14,7 @@ import com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult
 import com.example.wlobbyapp.databinding.ItemMovieBinding
 import com.example.wlobbyapp.databinding.ItemPersonBinding
 import com.example.wlobbyapp.databinding.ItemTvBinding
+import com.example.wlobbyapp.ui.MainActivity
 import com.example.wlobbyapp.ui.adapters.SearchAdapter.MediaType.*
 import com.squareup.picasso.Picasso
 
@@ -61,6 +63,8 @@ class SearchAdapter(
             MOVIE.value -> {
                 holder.itemMovieBinding.movieData = movies
                 if (movies.poster_path != null)
+//                    Glide.with(MainActivity::class.java as MainActivity).download(moviePhotoPoster.replace("{id}", movies.poster_path.toString()))
+//                        .into(holder.itemMovieBinding.imageMovie)
                     Picasso.get().load(moviePhotoPoster.replace("{id}", movies.poster_path.toString())).into(holder.itemMovieBinding.imageMovie)
                 //objectin const valuelarina direk erisim var bu sekilde o url'in id kismini replace ederek resimleri
                 // cekebiliyorum ayrica buyuk versiyonu icin de bir constv olusturuldu
@@ -74,6 +78,8 @@ class SearchAdapter(
             TV.value -> {
                 holder.itemTvBinding.movieData = movies
                 if (movies.poster_path != null)
+//                    Glide.with(MainActivity::class.java as MainActivity).download(moviePhotoPoster.replace("{id}", movies.poster_path.toString()))
+//                        .into(holder.itemTvBinding.imageMovie)
                     Picasso.get().load(moviePhotoPoster.replace("{id}", movies.poster_path.toString())).into(holder.itemTvBinding.imageMovie)
                 holder.itemTvBinding.movieTitle.text = movies.name
                 holder.itemTvBinding.imageMovie.setOnClickListener {
@@ -86,6 +92,8 @@ class SearchAdapter(
             PEOPLE.value -> {
                 holder.itemPersonBinding.movieData = movies
                 if (movies.profile_path != null)
+//                    Glide.with(MainActivity::class.java as MainActivity).download(personPhotoPoster.replace("{id}", movies.poster_path.toString()))
+//                        .into(holder.itemPersonBinding.imageMovie)
                     Picasso.get().load(personPhotoPoster.replace("{id}", movies.profile_path.toString())).into(holder.itemPersonBinding.imageMovie)
                 holder.itemPersonBinding.movieTitle.text = movies.name
                 holder.itemPersonBinding.imageMovie.setOnClickListener {

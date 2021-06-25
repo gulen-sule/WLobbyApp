@@ -3,18 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/lobbyMainFragment"
-    >
+    app:startDestination="@id/lobbyMainFragment">
     <fragment
         android:id="@+id/searchResultsFragment"
         android:name="com.example.wlobbyapp.ui.searchUi.SearchResultsFragment"
         android:label="SearchResultsFragment"
-
         >
         <action
             android:id="@+id/action_searchResultsFragment_to_movieDetailedFragment"
-            app:destination="@id/movieDetailedFragment"
-            />
+            app:destination="@id/movieDetailedFragment" />
         <action
             android:id="@+id/action_searchResultsFragment_to_tvDetailedFragment"
             app:destination="@id/tvDetailedFragment" />
@@ -25,19 +22,13 @@
             android:id="@+id/action_searchResultsFragment_to_lobbyMainFragment"
             app:destination="@id/lobbyMainFragment" />
         <action
-            android:id="@+id/action_searchResultsFragment_to_chooseOtherThingsFragment2"
-            app:destination="@id/chooseOtherThingsFragment2" />
-        <action
             android:id="@+id/action_searchResultsFragment_to_profileMainFragment"
             app:destination="@id/profileMainFragment" />
-        <action
-            android:id="@+id/action_searchResultsFragment_self"
-            app:destination="@id/searchResultsFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailedFragment"
         android:name="com.example.wlobbyapp.ui.movieFragment.main.MovieDetailedFragment"
-        android:label="MovieDetailedFragment" >
+        android:label="MovieDetailedFragment">
         <argument
             android:name="movie_id"
             app:argType="integer" />
@@ -45,18 +36,21 @@
     <fragment
         android:id="@+id/tvDetailedFragment"
         android:name="com.example.wlobbyapp.ui.tvFragment.TvDetailedFragment"
-        android:label="TvDetailedFragment" >
+        android:label="TvDetailedFragment">
         <argument
             android:name="tv_id"
             app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/chooseDateFragment"
-        android:name="com.example.wlobbyapp.ui.fragments.ChooseDateFragment"
-        android:label="ChooseDateFragment" >
+        android:name="com.example.wlobbyapp.ui.dateFragment.ChooseDateFragment"
+        android:label="ChooseDateFragment">
         <argument
             android:name="resultData"
             app:argType="com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult" />
+        <action
+            android:id="@+id/action_chooseDateFragment_to_chooseOtherThingsFragment2"
+            app:destination="@id/chooseOtherThingsFragment2" />
     </fragment>
     <fragment
         android:id="@+id/chooseOtherThingsFragment2"
@@ -64,8 +58,9 @@
         android:label="ChooseOtherThingsFragment" />
     <fragment
         android:id="@+id/lobbyMainFragment"
-        android:name="com.example.wlobbyapp.ui.fragments.LobbyMainFragment"
-        android:label="LobbyMainFragment" />
+        android:name="com.example.wlobbyapp.ui.lobbyFragment.LobbyMainFragment"
+        android:label="LobbyMainFragment"
+        tools:layout="@layout/fragment_lobby_main" />
     <fragment
         android:id="@+id/profileMainFragment"
         android:name="com.example.wlobbyapp.ui.fragments.ProfileMainFragment"

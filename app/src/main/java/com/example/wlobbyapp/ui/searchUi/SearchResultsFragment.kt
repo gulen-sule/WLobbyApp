@@ -18,7 +18,6 @@ import com.example.wlobbyapp.R
 import com.example.wlobbyapp.databinding.FragmentSearchResultsBinding
 import com.example.wlobbyapp.model.ApiClient
 import com.example.wlobbyapp.model.SearchPagingSource
-import com.example.wlobbyapp.model.search.multiSearch.MultiSearchModel
 import com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult
 import com.example.wlobbyapp.model.service.ApiService
 import com.example.wlobbyapp.ui.MainActivity
@@ -33,8 +32,7 @@ class SearchResultsFragment : Fragment() {
     private lateinit var binding: FragmentSearchResultsBinding
     private var apiService: ApiService? = null
     private var isPaged: Boolean = false
-    private lateinit var searchResultData: MultiSearchModel
-    private var textToSearch: String = "aa"
+    private var textToSearch: String = "One"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
@@ -51,7 +49,7 @@ class SearchResultsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val bundle_given = this.arguments?.getBundle("key_text_bundle")
         if (bundle_given != null) {
-            textToSearch = bundle_given.getString("paging_key", "aa")
+            textToSearch = bundle_given.getString("paging_key", "One")
         }
 //        LobbyApp.getInstance().progressValue.observe(requireActivity(), {
 //            //observer kullanımı
@@ -59,7 +57,7 @@ class SearchResultsFragment : Fragment() {
 //          kullanıcı tokenları shared preferences ile tutulacak 27 mb hafizasi var
 
         val adapter = SearchAdapter(UserComparator, onClickImage = {
-            binding.progressBar.visibility=View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
             it?.let {
                 when (it.media_type) {
                     MediaType.MOVIE.value -> {
@@ -81,7 +79,7 @@ class SearchResultsFragment : Fragment() {
                 }
             }
         }, onClickButton = { itemData ->
-            binding.progressBar.visibility=View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
             val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToChooseDateFragment(itemData)
             Log.d("navController content", findNavController().toString())
             findNavController().navigate(action)
@@ -92,22 +90,22 @@ class SearchResultsFragment : Fragment() {
         apiService = ApiClient.getInstance()?.getClient()
         lifecycleScope.launch {
             getPaging().collectLatest { pagingData ->
-                binding.progressBar.visibility=View.GONE
+                binding.progressBar.visibility = View.GONE
                 adapter.submitData(pagingData)
             }
         }
         binding.searchButton.setOnClickListener {
-            binding.progressBar.visibility=View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
 
             bundle_given?.remove("paging_key")
             textToSearch = binding.editTextTextPersonName.text.toString()
             val bundle = Bundle()
             bundle.putString("paging_key", textToSearch)
-            arguments?.putBundle("key_text_bundle",bundle)
+            arguments?.putBundle("key_text_bundle", bundle)
 
             lifecycleScope.launch {
                 getPaging().collectLatest { pagingData ->
-                    binding.progressBar.visibility=View.GONE
+                    binding.progressBar.visibility = View.GONE
                     adapter.submitData(pagingData)
                 }
             }
@@ -158,11 +156,9 @@ class SearchResultsFragment : Fragment() {
     }
 
     fun getMainActivity(): MainActivity? {
-        if((requireActivity() is MainActivity))
-        {
+        if ((requireActivity() is MainActivity)) {
             return requireActivity() as MainActivity
         }
-
         return null
     }
 }
