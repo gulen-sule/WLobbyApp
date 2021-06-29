@@ -5,27 +5,6 @@
     android:id="@+id/navigation_main"
     app:startDestination="@id/lobbyMainFragment">
     <fragment
-        android:id="@+id/searchResultsFragment"
-        android:name="com.example.wlobbyapp.ui.searchUi.SearchResultsFragment"
-        android:label="SearchResultsFragment"
-        >
-        <action
-            android:id="@+id/action_searchResultsFragment_to_movieDetailedFragment"
-            app:destination="@id/movieDetailedFragment" />
-        <action
-            android:id="@+id/action_searchResultsFragment_to_tvDetailedFragment"
-            app:destination="@id/tvDetailedFragment" />
-        <action
-            android:id="@+id/action_searchResultsFragment_to_chooseDateFragment"
-            app:destination="@id/chooseDateFragment" />
-        <action
-            android:id="@+id/action_searchResultsFragment_to_lobbyMainFragment"
-            app:destination="@id/lobbyMainFragment" />
-        <action
-            android:id="@+id/action_searchResultsFragment_to_profileMainFragment"
-            app:destination="@id/profileMainFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/movieDetailedFragment"
         android:name="com.example.wlobbyapp.ui.movieFragment.main.MovieDetailedFragment"
         android:label="MovieDetailedFragment">
@@ -47,7 +26,7 @@
         android:label="ChooseDateFragment">
         <argument
             android:name="resultData"
-            app:argType="com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult" />
+            app:argType="com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchResults" />
         <action
             android:id="@+id/action_chooseDateFragment_to_chooseOtherThingsFragment2"
             app:destination="@id/chooseOtherThingsFragment2" />
@@ -65,4 +44,24 @@
         android:id="@+id/profileMainFragment"
         android:name="com.example.wlobbyapp.ui.fragments.ProfileMainFragment"
         android:label="ProfileMainFragment" />
+    <fragment
+        android:id="@+id/searchResultsFragment"
+        android:name="com.example.wlobbyapp.ui.searchUi.SearchResultsFragment"
+        android:label="SearchResultsFragment" >
+        <action
+            android:id="@+id/action_searchResultsFragment_to_tvDetailedFragment"
+            app:destination="@id/tvDetailedFragment" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_lobbyMainFragment"
+            app:destination="@id/lobbyMainFragment" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_movieDetailedFragment"
+            app:destination="@id/movieDetailedFragment" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_chooseDateFragment"
+            app:destination="@id/chooseDateFragment" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_profileMainFragment"
+            app:destination="@id/profileMainFragment" />
+    </fragment>
 </navigation>

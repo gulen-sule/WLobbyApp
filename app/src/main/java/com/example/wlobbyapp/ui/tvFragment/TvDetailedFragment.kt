@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.example.wlobbyapp.model.Const.moviePhotoPoster
+import com.example.wlobbyapp.data.api.service.Const.moviePhotoPoster
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.databinding.FragmentTvDetailedBinding
-import com.example.wlobbyapp.model.detailedModels.tvDetailed.TvModel
+import com.example.wlobbyapp.data.api.models.detailedModels.tvDetailed.TvModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

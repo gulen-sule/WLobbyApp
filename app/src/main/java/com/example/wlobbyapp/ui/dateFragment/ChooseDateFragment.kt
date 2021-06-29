@@ -12,16 +12,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.wlobbyapp.R
+import com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchResults
 import com.example.wlobbyapp.databinding.FragmentChooseDateBinding
-import com.example.wlobbyapp.model.Room.RoomDao
-import com.example.wlobbyapp.model.Room.WatchedDatabase
-import com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult
-import com.example.wlobbyapp.ui.adapters.SearchAdapter
+import com.example.wlobbyapp.data.database.room.dao.WatchedItemDao
+import com.example.wlobbyapp.data.database.room.WatchedDatabase
+import com.example.wlobbyapp.ui.searchUi.adapters.SearchAdapter
 import com.squareup.picasso.Picasso
 
 class ChooseDateFragment : Fragment() {
     private lateinit var binding: FragmentChooseDateBinding
-    private lateinit var itemDao: RoomDao
+    private lateinit var itemDao: WatchedItemDao
     private lateinit var viewModel: ChooseDateViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_choose_date, container, false)
@@ -30,10 +30,10 @@ class ChooseDateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        itemDao = WatchedDatabase.invoke(requireContext().applicationContext).RoomDao()
+        itemDao = WatchedDatabase.invoke(requireContext().applicationContext).databaseDao()
         viewModel = ChooseDateViewModel(itemDao)
 
-        val itemData = arguments?.getSerializable("resultData") as MultiSearchResult?
+        val itemData = arguments?.getSerializable("resultData") as MultiSearchResults?
         setValuestoItems(itemData)
 
         val animationCome = AnimationUtils.loadAnimation(requireContext(), R.anim.slidein_bottom)
@@ -100,7 +100,7 @@ class ChooseDateFragment : Fragment() {
         })
     }
 
-    fun setValuestoItems(itemData: MultiSearchResult?) {
+    fun setValuestoItems(itemData: MultiSearchResults?) {
         itemData?.let { data ->
             binding.mediaTypeDate.text = data.media_type
             when (data.media_type) {

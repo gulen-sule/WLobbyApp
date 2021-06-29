@@ -9,20 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
+import androidx.paging.*
 import androidx.recyclerview.widget.DiffUtil
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.databinding.FragmentSearchResultsBinding
-import com.example.wlobbyapp.model.ApiClient
-import com.example.wlobbyapp.model.SearchPagingSource
-import com.example.wlobbyapp.model.search.multiSearch.MultiSearchResult
-import com.example.wlobbyapp.model.service.ApiService
+import com.example.wlobbyapp.data.api.service.ApiClient
+import com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchResults
+import com.example.wlobbyapp.data.api.service.ApiService
 import com.example.wlobbyapp.ui.MainActivity
-import com.example.wlobbyapp.ui.adapters.SearchAdapter
-import com.example.wlobbyapp.ui.adapters.SearchAdapter.MediaType
+import com.example.wlobbyapp.ui.searchUi.adapters.SearchAdapter
+import com.example.wlobbyapp.ui.searchUi.adapters.SearchAdapter.MediaType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -112,14 +108,16 @@ class SearchResultsFragment : Fragment() {
         }
     }
 
-    private fun getPaging(): Flow<PagingData<MultiSearchResult>> {
+    private fun getPaging(): Flow<PagingData<MultiSearchResults>> {
         return Pager(
             PagingConfig(pageSize = 20)
         ) {
             SearchPagingSource(textToSearch, apiService!!)
         }.flow
             .cachedIn(requireActivity().lifecycleScope)
+
     }
+
 
 //    private fun getMovies(key: String, completed: (MultiSearchModel) -> Unit) {
 //        val response = apiService?.multiSearch(query = key)
@@ -139,13 +137,13 @@ class SearchResultsFragment : Fragment() {
 //        })
 //    }
 
-    object UserComparator : DiffUtil.ItemCallback<MultiSearchResult>() {
-        override fun areItemsTheSame(oldItem: MultiSearchResult, newItem: MultiSearchResult): Boolean {
+    object UserComparator : DiffUtil.ItemCallback<MultiSearchResults>() {
+        override fun areItemsTheSame(oldItem: MultiSearchResults, newItem: MultiSearchResults): Boolean {
             // Id is unique.
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: MultiSearchResult, newItem: MultiSearchResult): Boolean {
+        override fun areContentsTheSame(oldItem: MultiSearchResults, newItem: MultiSearchResults): Boolean {
             return oldItem == newItem
         }
     }

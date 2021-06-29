@@ -1,8 +1,8 @@
 package com.example.wlobbyapp.ui.tvFragment
 
-import com.example.wlobbyapp.model.ApiClient
-import com.example.wlobbyapp.model.detailedModels.tvDetailed.TvModel
-import com.example.wlobbyapp.model.service.ApiService
+import com.example.wlobbyapp.data.api.service.ApiClient
+import com.example.wlobbyapp.data.api.models.detailedModels.tvDetailed.TvModel
+import com.example.wlobbyapp.data.api.service.ApiService
 
 class TvDetailedViewModel {
     private var apiService: ApiService? = null

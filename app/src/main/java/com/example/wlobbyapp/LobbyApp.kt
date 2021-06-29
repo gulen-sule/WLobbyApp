@@ -2,8 +2,11 @@ package com.example.wlobbyapp
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.multidex.MultiDexApplication
+import dagger.hilt.android.HiltAndroidApp
 
-class LobbyApp : Application() {// application en ust classlardan butun activitylerin buna erisimi var  observer pattern ile
+@HiltAndroidApp
+class LobbyApp : MultiDexApplication() {// application en ust classlardan butun activitylerin buna erisimi var  observer pattern ile
     //buna erisip sonra da baska activityleri veya fragmentlari burdan es zamanli uyarabiliyorsun
 
     var progressValue = MutableLiveData(0)
@@ -19,5 +22,11 @@ class LobbyApp : Application() {// application en ust classlardan butun activity
 
             return app as LobbyApp
         }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+
     }
 }

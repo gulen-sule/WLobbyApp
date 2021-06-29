@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wlobbyapp.R
+import com.example.wlobbyapp.data.database.room.data.WatchedEntity
 import com.example.wlobbyapp.databinding.ItemLobbyFavoriteBinding
-import com.example.wlobbyapp.model.Room.RoomData
 import com.squareup.picasso.Picasso
 
-class LobbyRecyclerAdapter(private var data: List<RoomData>) : RecyclerView.Adapter<LobbyRecyclerAdapter.ViewHolder>() {
+class LobbyRecyclerAdapter(private var data: List<WatchedEntity>) : RecyclerView.Adapter<LobbyRecyclerAdapter.ViewHolder>() {
 
     inner class ViewHolder(todoView: ItemLobbyFavoriteBinding) : RecyclerView.ViewHolder(todoView.root) {
         var eventbinding: ItemLobbyFavoriteBinding = todoView
@@ -32,9 +32,13 @@ class LobbyRecyclerAdapter(private var data: List<RoomData>) : RecyclerView.Adap
         )
             .into(holder.eventbinding.itemPhotoPoster)
         holder.eventbinding.itemDate.text = watched.date
+
+        holder.eventbinding.rootCL.setOnClickListener {
+
+        }
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+       return data.size
     }
 }

@@ -1,9 +1,9 @@
 package com.example.wlobbyapp.ui.movieFragment.main
 
 import androidx.lifecycle.ViewModel
-import com.example.wlobbyapp.model.ApiClient
-import com.example.wlobbyapp.model.detailedModels.MovieDetailed.MovieModel
-import com.example.wlobbyapp.model.service.ApiService
+import com.example.wlobbyapp.data.api.service.ApiClient
+import com.example.wlobbyapp.data.api.models.detailedModels.MovieDetailed.MovieModel
+import com.example.wlobbyapp.data.api.service.ApiService
 
 class MovieDetailedViewModel : ViewModel() {
     private var apiService: ApiService? = null

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.databinding.FragmentMovieDetailInfoBinding
-import com.example.wlobbyapp.model.detailedModels.MovieDetailed.MovieModel
+import com.example.wlobbyapp.data.api.models.detailedModels.MovieDetailed.MovieModel
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
