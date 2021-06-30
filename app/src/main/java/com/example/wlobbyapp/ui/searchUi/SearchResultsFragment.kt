@@ -14,20 +14,23 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.databinding.FragmentSearchResultsBinding
 import com.example.wlobbyapp.data.api.service.ApiClient
-import com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchResults
+import com.example.wlobbyapp.data.api.models.searchModels.multiSearch.MultiSearchResults
 import com.example.wlobbyapp.data.api.service.ApiService
 import com.example.wlobbyapp.ui.MainActivity
+import com.example.wlobbyapp.data.event.MessageEvent
 import com.example.wlobbyapp.ui.searchUi.adapters.SearchAdapter
 import com.example.wlobbyapp.ui.searchUi.adapters.SearchAdapter.MediaType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
 
 class SearchResultsFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchResultsBinding
     private var apiService: ApiService? = null
     private var isPaged: Boolean = false
+    private lateinit var adapter: SearchAdapter
     private var textToSearch: String = "One"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,42 +50,15 @@ class SearchResultsFragment : Fragment() {
         if (bundle_given != null) {
             textToSearch = bundle_given.getString("paging_key", "One")
         }
+        val eventBus=EventBus.getDefault()
+        val event= MessageEvent()
+        eventBus.post(event)
+
 //        LobbyApp.getInstance().progressValue.observe(requireActivity(), {
 //            //observer kullanımı
 //        }) ihtiyacım olursa diye ogren
 //          kullanıcı tokenları shared preferences ile tutulacak 27 mb hafizasi var
-
-        val adapter = SearchAdapter(UserComparator, onClickImage = {
-            binding.progressBar.visibility = View.VISIBLE
-            it?.let {
-                when (it.media_type) {
-                    MediaType.MOVIE.value -> {
-                        it.id?.let { movieId ->
-                            val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToMovieDetailedFragment(movieId)
-                            getMainActivity()?.navController?.navigate(action)
-                            //Navigation.findNavController(requireView()).navigate(action)
-                        }
-                    }
-                    MediaType.TV.value -> {
-                        it.id?.let { tvId ->
-                            val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToTvDetailedFragment(tvId)
-                            (requireActivity() as MainActivity).navController.navigate(action)
-
-                        }
-                    }
-                    MediaType.COLL.value -> {
-                    }
-                }
-            }
-        }, onClickButton = { itemData ->
-            binding.progressBar.visibility = View.VISIBLE
-            val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToChooseDateFragment(itemData)
-            Log.d("navController content", findNavController().toString())
-            findNavController().navigate(action)
-
-        })
-
-        binding.searchRecylerView.adapter = adapter
+        setAdapter()
         apiService = ApiClient.getInstance()?.getClient()
         lifecycleScope.launch {
             getPaging().collectLatest { pagingData ->
@@ -91,6 +67,7 @@ class SearchResultsFragment : Fragment() {
             }
         }
         binding.searchButton.setOnClickListener {
+
             binding.progressBar.visibility = View.VISIBLE
 
             bundle_given?.remove("paging_key")
@@ -158,5 +135,40 @@ class SearchResultsFragment : Fragment() {
             return requireActivity() as MainActivity
         }
         return null
+    }
+
+    private fun setAdapter() {
+        adapter = SearchAdapter(UserComparator, onClickImage = {
+            binding.progressBar.visibility = View.VISIBLE
+            it?.let {
+                when (it.media_type) {
+                    MediaType.MOVIE.value -> {
+                        it.id?.let { movieId ->
+                            val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToMovieDetailedFragment(movieId)
+                            getMainActivity()?.navController?.navigate(action)
+                            //Navigation.findNavController(requireView()).navigate(action)
+                        }
+                    }
+                    MediaType.TV.value -> {
+                        it.id?.let { tvId ->
+                            val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToTvDetailedFragment(tvId)
+                            (requireActivity() as MainActivity).navController.navigate(action)
+
+                        }
+                    }
+                    MediaType.COLL.value -> {
+                    }
+                }
+            }
+        }, onClickButton = { itemData ->
+            binding.progressBar.visibility = View.VISIBLE
+            val action = SearchResultsFragmentDirections.actionSearchResultsFragmentToChooseDateFragment(itemData)
+            Log.d("navController content", findNavController().toString())
+            findNavController().navigate(action)
+
+        })
+
+        binding.searchRecylerView.adapter = adapter
+
     }
 }

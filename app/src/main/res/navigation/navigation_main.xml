@@ -26,14 +26,14 @@
         android:label="ChooseDateFragment">
         <argument
             android:name="resultData"
-            app:argType="com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchResults" />
+            app:argType="com.example.wlobbyapp.data.api.models.searchModels.multiSearch.MultiSearchResults" />
         <action
             android:id="@+id/action_chooseDateFragment_to_chooseOtherThingsFragment2"
             app:destination="@id/chooseOtherThingsFragment2" />
     </fragment>
     <fragment
         android:id="@+id/chooseOtherThingsFragment2"
-        android:name="com.example.wlobbyapp.ui.fragments.ChooseOtherThingsFragment"
+        android:name="com.example.wlobbyapp.ui.otherfragments.ChooseOtherThingsFragment"
         android:label="ChooseOtherThingsFragment" />
     <fragment
         android:id="@+id/lobbyMainFragment"
@@ -42,7 +42,7 @@
         tools:layout="@layout/fragment_lobby_main" />
     <fragment
         android:id="@+id/profileMainFragment"
-        android:name="com.example.wlobbyapp.ui.fragments.ProfileMainFragment"
+        android:name="com.example.wlobbyapp.ui.otherfragments.ProfileMainFragment"
         android:label="ProfileMainFragment" />
     <fragment
         android:id="@+id/searchResultsFragment"

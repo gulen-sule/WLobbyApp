@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.data.api.models.search.searchKeyword
+package com.example.wlobbyapp.data.api.models.searchModels.searchKeyword
 
 import com.google.gson.annotations.SerializedName
 

@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.wlobbyapp.R
-import com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchResults
+import com.example.wlobbyapp.data.api.models.searchModels.multiSearch.MultiSearchResults
 import com.example.wlobbyapp.databinding.FragmentChooseDateBinding
 import com.example.wlobbyapp.data.database.room.dao.WatchedItemDao
 import com.example.wlobbyapp.data.database.room.WatchedDatabase

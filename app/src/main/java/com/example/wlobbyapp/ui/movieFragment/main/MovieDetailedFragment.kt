@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.databinding.FragmentMovieDetailedBinding
 import com.example.wlobbyapp.data.api.models.detailedModels.MovieDetailed.MovieModel
-import com.example.wlobbyapp.ui.fragments.ChooseOtherThingsFragment
+import com.example.wlobbyapp.ui.otherfragments.ChooseOtherThingsFragment
 import com.example.wlobbyapp.ui.movieFragment.infoDetailed.MovieDetailInfoFragment
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.CoroutineScope

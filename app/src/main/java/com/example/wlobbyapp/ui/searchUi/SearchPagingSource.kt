@@ -3,7 +3,7 @@ package com.example.wlobbyapp.ui.searchUi
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchResults
+import com.example.wlobbyapp.data.api.models.searchModels.multiSearch.MultiSearchResults
 import com.example.wlobbyapp.data.api.service.ApiService
 
 class SearchPagingSource(

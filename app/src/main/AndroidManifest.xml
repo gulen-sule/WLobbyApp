@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    //android:name=".LobbyApp" ile bunun ana kontrol saglayicisi oldugunu soyluyorsun sonra her yerden erisim oluyor
 
     <application
         android:name=".LobbyApp"
@@ -14,11 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WLobbyApp">
+        <service
+            android:name=".service.PosterImageService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.UploadService"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action
                     android:name="android.intent.action.MAIN"
                     android:windowSoftInputMode="stateVisible|adjustResize" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

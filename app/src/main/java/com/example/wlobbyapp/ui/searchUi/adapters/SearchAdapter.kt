@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wlobbyapp.data.api.service.Const.moviePhotoPoster
 import com.example.wlobbyapp.data.api.service.Const.personPhotoPoster
 import com.example.wlobbyapp.R
-import com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchResults
+import com.example.wlobbyapp.data.api.models.searchModels.multiSearch.MultiSearchResults
 import com.example.wlobbyapp.databinding.ItemMovieBinding
 import com.example.wlobbyapp.databinding.ItemPersonBinding
 import com.example.wlobbyapp.databinding.ItemTvBinding

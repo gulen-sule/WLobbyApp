@@ -1,6 +1,5 @@
 package com.example.wlobbyapp
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.multidex.MultiDexApplication
 import dagger.hilt.android.HiltAndroidApp

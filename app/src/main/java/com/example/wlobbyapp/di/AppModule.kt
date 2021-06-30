@@ -19,9 +19,8 @@ import dagger.hilt.components.SingletonComponent
 interface AppModule {
 
     @Binds
-    fun bindWatchedItemRepositoryRepository(watchedItemRepository: WatchedItemRepositoryImpl): WatchedItemRepository
+    fun bindWatchedItemRepository(watchedItemRepository: WatchedItemRepositoryImpl): WatchedItemRepository
 }
-
 
 @InstallIn(SingletonComponent::class)
 @Module

@@ -4,9 +4,9 @@ import com.example.wlobbyapp.data.api.models.detailedModels.CollectionDetailed.C
 import com.example.wlobbyapp.data.api.models.detailedModels.MovieDetailed.MovieModel
 import com.example.wlobbyapp.data.api.models.detailedModels.peopleDetailed.PeopleModel
 import com.example.wlobbyapp.data.api.models.detailedModels.tvDetailed.TvModel
-import com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchModel
-import com.example.wlobbyapp.data.api.models.search.searchCollection.CollectionSearchModel
-import com.example.wlobbyapp.data.api.models.search.searchKeyword.SearchKeywordModel
+import com.example.wlobbyapp.data.api.models.searchModels.multiSearch.MultiSearchModel
+import com.example.wlobbyapp.data.api.models.searchModels.searchCollection.CollectionSearchModel
+import com.example.wlobbyapp.data.api.models.searchModels.searchKeyword.SearchKeywordModel
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET

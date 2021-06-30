@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.data.api.models.search.multiSearch
+package com.example.wlobbyapp.data.api.models.searchModels.multiSearch
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

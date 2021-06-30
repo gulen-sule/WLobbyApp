@@ -6,7 +6,7 @@
     <data>
         <variable
             name="movieData"
-            type="com.example.wlobbyapp.data.api.models.search.multiSearch.MultiSearchResults" />
+            type="com.example.wlobbyapp.data.api.models.searchModels.multiSearch.MultiSearchResults" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

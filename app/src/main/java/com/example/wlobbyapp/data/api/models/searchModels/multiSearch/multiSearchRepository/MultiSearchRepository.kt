@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.data.api.models.search.multiSearch.multiSearchRepository
+package com.example.wlobbyapp.data.api.models.searchModels.multiSearch.multiSearchRepository
 
 import com.example.wlobbyapp.data.api.service.ApiService
 

@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.data.api.models.search.searchCollection
+package com.example.wlobbyapp.data.api.models.searchModels.searchCollection
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

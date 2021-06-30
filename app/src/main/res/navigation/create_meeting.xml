@@ -4,6 +4,6 @@
     android:id="@+id/navigation_detailed">
     <fragment
         android:id="@+id/chooseOtherThingsFragment"
-        android:name="com.example.wlobbyapp.ui.fragments.ChooseOtherThingsFragment"
+        android:name="com.example.wlobbyapp.ui.otherfragments.ChooseOtherThingsFragment"
         android:label="ChooseOtherThingsFragment" />
 </navigation>
