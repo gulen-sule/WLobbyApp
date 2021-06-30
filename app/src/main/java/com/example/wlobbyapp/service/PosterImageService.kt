@@ -41,7 +41,7 @@ class PosterImageService : Service() {
         when (event) {
             is LobbyImageEvent -> {
                 // val path =filesDir
-                val name = Random.nextInt().absoluteValue.toString() + ".png"
+                val name = Random.nextInt().absoluteValue.toString() + ".jpg"
                 val file = File(filesDir, name)
                 val boo = file.createNewFile()
                 val url = URL(event.imageUrl)

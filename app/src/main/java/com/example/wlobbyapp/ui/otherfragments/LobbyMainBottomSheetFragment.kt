@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.example.wlobbyapp.R
 import com.example.wlobbyapp.databinding.LobbyMainBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import java.io.File
 
@@ -32,8 +34,11 @@ class LobbyMainBottomSheetFragment : BottomSheetDialogFragment() {
             val urlPAth = File(requireContext().filesDir, it2)
             Log.d("imagePathTAG", urlPAth.path.toString())
 
+            requireActivity().runOnUiThread {
+                //Picasso.get().load(urlPAth).networkPolicy(NetworkPolicy.OFFLINE).into(binding.bottomSheetImage)
+                Glide.with(requireActivity()).load(urlPAth).into(binding.bottomSheetImage)
+            }
 
-            //Picasso.get().load(File(requireContext().filesDir, it2)).into(binding.bottomSheetImage)
         }
     }
 
