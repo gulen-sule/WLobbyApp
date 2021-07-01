@@ -45,17 +45,17 @@ class PosterImageService : Service() {
                 val file = File(filesDir, name)
                 val boo = file.createNewFile()
                 val url = URL(event.imageUrl)
-                Log.d("isFileTAG", file.exists().toString())
+                Log.d("imageURLTAG", filesDir.path)
                 Log.d("isFileTAG", file.path)
                 CoroutineScope(Dispatchers.IO).launch {
                     val bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
                     val fileOutputStream = FileOutputStream(file)
-                    Log.d("isFileTAG3", url.toString())
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 85, fileOutputStream)
+                    Log.d("pathTAG3",file.path)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
                     fileOutputStream.flush()
                     fileOutputStream.close()
                 }
-                eventBus.post(LobbyImageLoadedEvent(file.path, name))
+                eventBus.post(LobbyImageLoadedEvent(filesDir.path, name))
             }
         }
     }

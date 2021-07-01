@@ -1,9 +1,6 @@
 package com.example.wlobbyapp.ui.lobbyFragment
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Picture
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,7 +15,6 @@ import com.example.wlobbyapp.data.database.room.data.WatchedEntity
 import com.example.wlobbyapp.data.event.LobbyImageEvent
 import com.example.wlobbyapp.data.event.LobbyImageLoadedEvent
 import com.example.wlobbyapp.databinding.FragmentLobbyMainBinding
-import com.example.wlobbyapp.ui.MainActivity
 import com.example.wlobbyapp.ui.otherfragments.LobbyMainBottomSheetFragment
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +32,7 @@ class LobbyMainFragment : Fragment() {
     private val viewModel: LobbyViewModel by viewModels()
     private var adapter: LobbyRecyclerAdapter? = null
     private var eventBus: EventBus = EventBus.getDefault()
-    lateinit var bottomSheet: LobbyMainBottomSheetFragment
+    private var bottomSheet= LobbyMainBottomSheetFragment()
     private var savedInstanceState: Bundle? = null
 
 
@@ -49,7 +45,6 @@ class LobbyMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         //requireContext().startService(Intent(requireContext(), UploadService::class.java))
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -92,13 +87,14 @@ class LobbyMainFragment : Fragment() {
                 Log.d("imageTAG", event.pathOfImage)
                 //val bitmap = BitmapFactory.decodeFile(event.pathOfImage)
                 //bottomSheet.onViewCreated(requireView(), savedInstanceState)
-                bottomSheet = LobbyMainBottomSheetFragment()
                 bottomSheet.show(childFragmentManager, "bottomSheetFragment")
 
                 bottomSheet.onCreated = {
-                    bottomSheet.loadImg(event.pathOfImage,event.name)
+                    bottomSheet.loadImg(event.pathOfImage, event.name)
                 }
-            }
+
+
+}
         }
     }
 }

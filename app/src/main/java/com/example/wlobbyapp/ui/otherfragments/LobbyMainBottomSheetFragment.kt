@@ -1,5 +1,6 @@
 package com.example.wlobbyapp.ui.otherfragments
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,7 +16,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
+import java.io.FileInputStream
 
 class LobbyMainBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -23,23 +28,27 @@ class LobbyMainBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var behavior: BottomSheetBehavior<View>
 
     var loadImg: (url: String?, name: String) -> Unit = { it1, it2 ->
-        Log.d("imagePathTAG", it1.toString())
-        //binding.bottomSheetImage.setImageBitmap(it)
+        val file=File(it1,it2)
+        CoroutineScope(Dispatchers.IO).launch {
+            val bitmap = BitmapFactory.decodeStream(FileInputStream(file))
+            binding.bottomSheetImage.setImageBitmap(bitmap)
+            binding.bottomSheetImage.visibility = View.VISIBLE}
 
-        Handler(Looper.getMainLooper()).post {
-            binding.titleTV.text = it1.toString()
-            //binding.bottomSheetImage.visibility = View.VISIBLE
-            binding.bottomSheetImage.setImageResource(R.drawable.ic_calendar_plus)
 
-            val urlPAth = File(requireContext().filesDir, it2)
-            Log.d("imagePathTAG", urlPAth.path.toString())
-
-            requireActivity().runOnUiThread {
-                //Picasso.get().load(urlPAth).networkPolicy(NetworkPolicy.OFFLINE).into(binding.bottomSheetImage)
-                Glide.with(requireActivity()).load(urlPAth).into(binding.bottomSheetImage)
-            }
-
-        }
+//        Handler(Looper.getMainLooper()).post {
+//            binding.titleTV.text = it1.toString()
+//            //
+//            binding.bottomSheetImage.setImageResource(R.drawable.ic_calendar_plus)
+//
+//            val urlPAth = File(requireContext().filesDir, it2)
+//            Log.d("imagePathTAG", urlPAth.path.toString())
+//
+//            requireActivity().runOnUiThread {
+//                //Picasso.get().load(urlPAth).networkPolicy(NetworkPolicy.OFFLINE).into(binding.bottomSheetImage)
+//                Glide.with(requireActivity()).load(urlPAth).into(binding.bottomSheetImage)
+//            }
+//
+//        }
     }
 
     lateinit var onCreated: () -> Unit
