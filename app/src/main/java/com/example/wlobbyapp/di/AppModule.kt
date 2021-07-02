@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.wlobbyapp.data.database.room.WatchedDatabase
 import com.example.wlobbyapp.data.database.room.dao.WatchedItemDao
-import com.example.wlobbyapp.data.database.room.repository.WatchedItemRepository
+import com.example.wlobbyapp.data.database.WatchedItemRepository
 import com.example.wlobbyapp.data.database.room.repository.WatchedItemRepositoryImpl
 import dagger.Binds
 import dagger.Module

@@ -11,6 +11,9 @@
         <argument
             android:name="movie_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_movieDetailedFragment_to_chooseDateFragment"
+            app:destination="@id/chooseDateFragment" />
     </fragment>
     <fragment
         android:id="@+id/tvDetailedFragment"
@@ -58,10 +61,10 @@
             android:id="@+id/action_searchResultsFragment_to_movieDetailedFragment"
             app:destination="@id/movieDetailedFragment" />
         <action
-            android:id="@+id/action_searchResultsFragment_to_chooseDateFragment"
-            app:destination="@id/chooseDateFragment" />
-        <action
             android:id="@+id/action_searchResultsFragment_to_profileMainFragment"
             app:destination="@id/profileMainFragment" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_chooseDateFragment"
+            app:destination="@id/chooseDateFragment" />
     </fragment>
 </navigation>

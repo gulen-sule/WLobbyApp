@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.data.database.room.repository
+package com.example.wlobbyapp.data.database
 
 import android.content.Context
 import com.example.wlobbyapp.data.database.room.data.WatchedEntity

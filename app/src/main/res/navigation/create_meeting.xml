@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_detailed">
+    android:id="@+id/navigation_detailed"
+    app:startDestination="@id/chooseDateFragment2">
+    <fragment
+        android:id="@+id/chooseDateFragment2"
+        android:name="com.example.wlobbyapp.ui.dateFragment.ChooseDateFragment"
+        android:label="ChooseDateFragment" >
+        <action
+            android:id="@+id/action_chooseDateFragment2_to_chooseOtherThingsFragment"
+            app:destination="@id/chooseOtherThingsFragment" />
+        <argument
+            android:name="resultData"
+            app:argType="com.example.wlobbyapp.data.api.models.searchModels.multiSearch.MultiSearchResults" />
+    </fragment>
     <fragment
         android:id="@+id/chooseOtherThingsFragment"
         android:name="com.example.wlobbyapp.ui.otherfragments.ChooseOtherThingsFragment"

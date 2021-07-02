@@ -3,7 +3,7 @@ package com.example.wlobbyapp.ui.lobbyFragment
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.wlobbyapp.data.database.room.data.WatchedEntity
-import com.example.wlobbyapp.data.database.room.repository.WatchedItemRepository
+import com.example.wlobbyapp.data.database.WatchedItemRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ class LobbyViewModel @Inject constructor(private val watchedItemRepository: Watc
         return list
     }
 
-//
+
 //    suspend fun deleteTodo(position: Int): Int? {
 //        val itemModel = list?.get(position)
 //        if (itemModel != null) {

@@ -32,14 +32,13 @@ class LobbyMainFragment : Fragment() {
     private val viewModel: LobbyViewModel by viewModels()
     private var adapter: LobbyRecyclerAdapter? = null
     private var eventBus: EventBus = EventBus.getDefault()
-    private var bottomSheet= LobbyMainBottomSheetFragment()
+    private var bottomSheet = LobbyMainBottomSheetFragment()
     private var savedInstanceState: Bundle? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         this.savedInstanceState = savedInstanceState
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lobby_main, container, false)
-        //bottomSheet.onCreateView(inflater, container, savedInstanceState)
         return binding.root
     }
 
@@ -81,20 +80,18 @@ class LobbyMainFragment : Fragment() {
 
     @Subscribe
     fun imageLoaded(event: Any) {
-        when (event) {
-            is LobbyImageLoadedEvent -> {
-                Toast.makeText(context, "Image is loaded", Toast.LENGTH_SHORT).show()
-                Log.d("imageTAG", event.pathOfImage)
-                //val bitmap = BitmapFactory.decodeFile(event.pathOfImage)
-                //bottomSheet.onViewCreated(requireView(), savedInstanceState)
-                bottomSheet.show(childFragmentManager, "bottomSheetFragment")
-
-                bottomSheet.onCreated = {
-                    bottomSheet.loadImg(event.pathOfImage, event.name)
-                }
-
-
-}
-        }
+//        when (event) {
+//            is LobbyImageLoadedEvent -> {
+//                Toast.makeText(context, "Image is loaded", Toast.LENGTH_SHORT).show()
+//                Log.d("imageTAG", event.pathOfImage)
+//                //val bitmap = BitmapFactory.decodeFile(event.pathOfImage)
+//                //bottomSheet.onViewCreated(requireView(), savedInstanceState)
+//                bottomSheet.show(childFragmentManager, "bottomSheetFragment")
+//
+//                bottomSheet.onCreated = {
+//                    bottomSheet.loadImg(event.pathOfImage, event.name)
+//                }
+//            }
+//        }
     }
 }

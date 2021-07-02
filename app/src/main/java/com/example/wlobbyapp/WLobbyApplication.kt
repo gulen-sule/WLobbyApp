@@ -5,21 +5,21 @@ import androidx.multidex.MultiDexApplication
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class LobbyApp : MultiDexApplication() {// application en ust classlardan butun activitylerin buna erisimi var  observer pattern ile
+class WLobbyApplication : MultiDexApplication() {// application en ust classlardan butun activitylerin buna erisimi var  observer pattern ile
     //buna erisip sonra da baska activityleri veya fragmentlari burdan es zamanli uyarabiliyorsun
 
     var progressValue = MutableLiveData(0)
 
     companion object {
 
-        private var app: LobbyApp? = null
+        private var app: WLobbyApplication? = null
 
-        fun getInstance(): LobbyApp {
+        fun getInstance(): WLobbyApplication {
 
             if (app == null)
-                return LobbyApp()
+                return WLobbyApplication()
 
-            return app as LobbyApp
+            return app as WLobbyApplication
         }
     }
 

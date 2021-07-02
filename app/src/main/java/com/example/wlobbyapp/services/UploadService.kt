@@ -1,4 +1,4 @@
-package com.example.wlobbyapp.service
+package com.example.wlobbyapp.services
 
 import android.app.Service
 import android.content.Intent

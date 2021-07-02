@@ -1,22 +1,16 @@
-package com.example.wlobbyapp.service
+package com.example.wlobbyapp.services
 
 import android.app.Service
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.Environment
-import android.os.Handler
 import android.os.IBinder
-import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import com.example.wlobbyapp.data.event.LobbyImageEvent
 import com.example.wlobbyapp.data.event.LobbyImageLoadedEvent
-import com.example.wlobbyapp.ui.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.io.File

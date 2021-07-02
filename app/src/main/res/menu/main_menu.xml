@@ -9,7 +9,7 @@
         android:icon="@drawable/ic_movie_search"
         android:title="Search" />
     <item
-        android:id="@+id/homeAddItem"
-        android:icon="@drawable/ic_book_plus"
-        android:title="Add" />
+        android:id="@+id/profilePageItem"
+        android:icon="@drawable/ic_account"
+        android:title="Profile" />
 </menu>
