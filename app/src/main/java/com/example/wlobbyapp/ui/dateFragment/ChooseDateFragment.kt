@@ -78,9 +78,7 @@ class ChooseDateFragment : Fragment() {
                     binding.warningChooseDate.clearAnimation()
                     binding.warningChooseDate.startAnimation(animationGo)
                 }, 1000)
-
             }
-
             override fun onAnimationRepeat(animation: Animation?) {
             }
 
@@ -138,7 +136,6 @@ class ChooseDateFragment : Fragment() {
                 }
             }
         }
-
     }
 
 }

@@ -22,10 +22,4 @@ class WLobbyApplication : MultiDexApplication() {// application en ust classlard
             return app as WLobbyApplication
         }
     }
-
-    override fun onCreate() {
-        super.onCreate()
-
-
-    }
 }
